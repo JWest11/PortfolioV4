@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="Main.css">
+
+    <script src="dist/Utilities.js" type="module"></script>
+    <script src="dist/modalHandlers/ProjectsModal.js" type="module"></script>
+    <script src="dist/modalHandlers/SkillsModal.js" type="module"></script>
+    <script src="dist/modalHandlers/ContactModal.js" type="module"></script>
+    <script src="dist/ProjectGrid.js" type="module"></script>
+    <script src="dist/SkillsWheel.js" type="module"></script>
+    <script src="dist/Main.js" defer="true" type="module"></script>
+
+    <link rel="icon" href="./img/favicon.ico">
+    <title>Joseph West Portfolio</title>
+</head>
+
+<body>
+    <section id="Home" data-status="visible" data-js-selector="Home">
+        <h1 id="JosephWestHeader" data-js-selector="JosephWestHeader">Joseph West</h1>
+        <div id="HomeSectionHeadersContainer">
+            <div class="HomeSectionHeader" id="ProjectsHeader" data-js-selector="ProjectsHeader">Projects</div>
+            <div class="HomeSectionHeader" id="SkillsHeader" data-js-selector="SkillsHeader">Sk<span data-js-selector="i">i</span>lls</div>
+            <div class="HomeSectionHeader" id="ContactHeader" data-js-selector="ContactHeader">Contact</div>
+        </div>
+        <footer id="Links">
+            <div class="Link" data-status="light" data-js-selector="GithubLink"><a href="" target="_blank">
+                <img id="LinkImageGitHub" src="./img/linkIcons/githubLogoWhite.png"  alt="Github">
+            </a></div>
+            <div class="Link" data-status="light" data-js-selector="LeetcodeLink"><a href="" target="_blank">
+                <img id="LinkImageLeetCode" src="./img/linkIcons/leetcodeWhite.png"  alt="LeetCode">
+            </a></div>
+            <div class="Link" data-status="light" data-js-selector="LinkedInLink"><a href="" target="_blank">
+                <img id="LinkImageLinkedIn" src="./img/linkIcons/linkedInLogoWhite.png" alt="LinkedIn">
+            </a></div>
+        </footer>
+        
+    </section>
+    <section id="Projects" data-status="hidden" data-js-selector="ProjectsSection">
+        <button class="CloseButton" data-js-selector="ProjectsCloseButton">Close</button>
+        <div data-js-selector="ProjectsBackground" id="ProjectsBackground">
+            <div data-index="0" data-status="hoverable" data-js-selector="Project" class="Project">
+                <div class="ProjectHeader">
+                    <h2>This Portfolio</h2>
+                </div>
+                <div class="ProjectExit">
+                    <button class="CloseButton">Close</button>
+                </div>
+                <div class="ProjectImage">
+                    <img src="./img/projects/portfolioImage.png" alt="ProjectImage">
+                </div>
+                <div class="ProjectDescription">
+                    <p>This portfolio project. Made with TypeScript and CSS. It is responsive too!</p>
+                </div>
+                <div class="ProjectLinks">
+                    <a class="CloseButton">Source Code</a>
+                </div>
+            </div>
+            <div data-index="1" data-status="hoverable" data-js-selector="Project" class="Project">
+                <div class="ProjectHeader">
+                    <h2>Medieval Looter</h2>
+                </div>
+                <div class="ProjectExit">
+                    <button class="CloseButton">Close</button>
+                </div>
+                <div class="ProjectImage">
+                    <img src="./img/projects/unrealBackgroundImage.jpg" alt="ProjectImage">
+                </div>
+                <div class="ProjectDescription">
+                    <p>An Unreal Engine game in progress, using C++, Blender, and the Unreal Engine Editor. Currently completed are equipment and inventory systems, character animations, and core combat mechanics.</p>
+                </div>
+                <div class="ProjectLinks">
+                    <a class="CloseButton">Source Code</a>
+                </div>
+            </div>
+            <div data-index="2" data-status="hoverable" data-js-selector="Project" class="Project">
+                <div class="ProjectHeader">
+                    <h2>Chess Online</h2>
+                </div>
+                <div class="ProjectExit">
+                    <button class="CloseButton">Close</button>
+                </div>
+                <div class="ProjectImage">
+                    <img src="./img/projects/ChessOnlineThumbnail.png" alt="ProjectImage">
+                </div>
+                <div class="ProjectDescription">
+                    <p>Online player vs player chess using websockets, ASP.NET Core Blazor, and C#.</p>
+                </div>
+                <div class="ProjectLinks">
+                    <a class="CloseButton">Source Code</a>
+                    <a class="CloseButton">Live</a>
+                </div>
+            </div>
+            <div data-index="3" data-status="hoverable" data-js-selector="Project" class="Project">
+                <div class="ProjectHeader">
+                    <h2>Rasterizer</h2>
+                </div>
+                <div class="ProjectExit">
+                    <button class="CloseButton">Close</button>
+                </div>
+                <div class="ProjectImage">
+                    <img src="./img/projects/rasterizerThumbnail.png" alt="ProjectImage">
+                </div>
+                <div class="ProjectDescription">
+                    <p>A Rasterizer (basic 3D graphics renderer) created in C++.</p>
+                </div>
+                <div class="ProjectLinks">
+                    <a class="CloseButton">Source Code</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="Skills" data-status="hidden" data-js-selector="SkillsSection">
+        <button class="CloseButton" data-js-selector="SkillsCloseButton">Close</button>
+        <div class="SkillsFlexContainer">
+            <div data-js-selector="SkillsWheel" id="SkillsWheel">
+                <div class="CircleImage"></div>
+                <div data-js-selector="Skill" class="Skill">
+                    <img class="SkillImg" src="./img/skills/javascriptLogo.png" alt="Javascript Image">
+                    <p class="SkillText TextMedium">JavaScript</p>
+                </div>
+                <div data-js-selector="Skill" class="Skill">
+                    <img class="SkillImg" src="./img/skills/unrealLogo.png" alt="Unreal Engine Image">
+                    <p class="SkillText TextSmall">Unreal Engine</p>
+                </div>
+                <div data-js-selector="Skill" class="Skill">
+                    <img class="SkillImg" src="./img/skills/cppLogo.png" alt="C++ Logo">
+                    <p class="SkillText TextMedium">C++</p>
+                </div>
+                <div data-js-selector="Skill" class="Skill">
+                    <img class="SkillImg" src="./img/skills/csLogo.png" alt="C# Logo">
+                    <p class="SkillText TextMedium">C#</p>
+                </div>
+                <div data-js-selector="Skill" class="Skill">
+                    <img class="SkillImg" src="./img/skills/pythonLogo.png" alt="Python Logo">
+                    <p class="SkillText TextMedium">Python</p>
+                </div>
+                <div data-js-selector="Skill" class="Skill">
+                    <img class="SkillImg" src="./img/skills/sqlLogo.png" alt="SQL Logo">
+                    <p class="SkillText TextMedium">SQL</p>
+                </div>
+                <div data-js-selector="Skill" class="Skill">
+                    <img class="SkillImg" src="./img/skills/cssLogo.jpg" alt="CSS Logo">
+                    <p class="SkillText TextMedium">CSS</p>
+                </div>
+                <div data-js-selector="Skill" class="Skill">
+                    <img class="SkillImg" src="./img/skills/githubLogo.png" alt="GitHub Logo">
+                    <p class="SkillText TextMedium">GitHub</p>
+                </div>
+            </div>
+            <div class="ResumeContainer">
+                <a class="ResumeLink" href="./Joseph_West_Resume.pdf" target="_blank">
+                    <div class="ResumeImgContainer">
+                        <img class="ResumeImgWhiteBehind" alt="ResumeIcon">
+                        <img class="ResumeImg" alt="ResumeIcon">
+                    </div>
+                    <h2 class="ResumeText">Resume</h2>
+                </a>
+            </div>
+        </div>
+        
+    </section>
+    <section id="Contact" data-status="hidden" data-js-selector="ContactSection">
+        <button class="CloseButton" data-js-selector="ContactCloseButton">Close</button>
+        <div class="ContactBackground">
+            <div class="InputContainer">
+                <label for="Email">Email</label>
+                <input data-js-selector="EmailInput" type="email" name="Email" id="EmailInput">
+            </div>
+            <div class="InputContainer">
+                <label for="Subject">Subject</label>
+                <input data-js-selector="SubjectInput" type="text" name="Subject" id="SubjectInput">
+            </div>
+            <div class="InputContainer">
+                <label for="Message">Message</label>
+                <textarea data-js-selector="MessageInput" type="text" name="Message" id="MessageInput"></textarea>
+            </div>
+            <div class="InputContainer">
+                <button data-js-selector="SubmitButton">Submit</button>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>

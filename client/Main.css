@@ -1,0 +1,622 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Inter, Helvetica, Arial, sans-serif;
+}
+
+:root {
+    --red: hsl(0, 94%, 69%);
+    --blue: hsl(239, 32%, 49%);
+    --green: hsl(154, 83%, 45%);
+    --red-shadow: hsl(0, 100%, 54%);
+    --blue-shadow: hsl(248, 32%, 39%);
+    --green-shadow: hsl(154, 59%, 41%);
+    --shared-transition-duration: 800ms;
+}
+#Home {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#HomeSectionHeadersContainer {
+    height: 100%;
+    width: 100%;
+    display:flex;
+    flex-direction: row;
+    gap: 3rem;
+    align-items: center;
+    justify-content: center;
+}
+#JosephWestHeader {
+    font-size: 4em;
+    color: var(--red);
+    text-shadow: 1px 1px 5px var(--red);
+    transition: color var(--shared-transition-duration), text-shadow var(--shared-transition-duration);
+}
+#Links {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 1rem;
+    z-index: 2;
+    pointer-events: all;
+
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+.Link {
+    border: 2px outset hsl(0, 0%, 100%);
+    padding: 0.1rem;
+    background-color: none;
+    border-radius: 5px;
+
+    transition: background-color var(--shared-transition-duration);
+}
+.Link:hover {
+    background-color: white;
+}
+.Link img {
+    width: 2.8rem;
+    mix-blend-mode: difference;
+}
+
+body {
+    background-color: hsl(0, 0%, 17%);
+}
+.HomeSectionHeader {
+    font-size: 4em;
+    font-weight: normal;
+    color: whitesmoke;
+    cursor: pointer;
+}
+.CloseButton {
+    background-color: transparent;
+    border: 2px inset hsla(0, 0%, 12%, 0.479);
+    margin: 1rem;
+    border-radius: 5px;
+    padding: 0.8rem 1.2rem;
+
+    transition: background-color var(--shared-transition-duration);
+}
+.CloseButton:hover {
+    background-color: hsla(0, 0%, 17%, 0.295);
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    #JosephWestHeader {
+        text-align: center;
+    }
+    #HomeSectionHeadersContainer {
+        flex-direction: column;
+    }
+    #Links {
+        position: static;
+        z-index: 0;
+        align-self: end;
+    }
+    
+}
+
+/* Projects */
+
+:root {
+    --project-width: 300px;
+    --project-height: 300px;
+    --project-hover-scale: 1.2;
+    --project-scaled-width: calc(var(--project-width) * var(--project-hover-scale));
+    --project-scaled-height: calc(var(--project-height) * var(--project-hover-scale));
+    --project-gap-y: calc(var(--project-scaled-height) - var(--project-height));
+    --project-gap-x: calc(var(--project-scaled-width) - var(--project-width));
+    --project-container-margin-x: calc((100% - 2 * var(--project-width) - var(--project-gap-x)) / 2);
+
+    --phone-pre-focus-left: 0;
+    --phone-pre-focus-top: 0;
+
+    --project-grid-gap: 1rem;
+}
+
+#ProjectsBackground {
+    position: relative;
+    min-height: calc(var(--project-height) * 2 + var(--project-gap-y));
+}
+.Project {
+    position: absolute;
+    width: var(--project-width);
+    height: var(--project-height);
+    background-color: white;
+    box-shadow: 2px 2px 2px 2px hsla(0, 0%, 12%, 0.479);
+    border-radius: 0.6rem;
+    overflow: hidden;
+
+    transition: all var(--shared-transition-duration);
+
+    display: grid;
+    gap: var(--project-grid-gap);
+    grid-template-columns: repeat(2, minmax(var(--project-width), 1fr));
+    grid-template-rows: minmax(calc(var(--project-width) / 3 - var(--project-grid-gap) / 2), 1fr) minmax(calc(var(--project-width) * 2/3 - var(--project-grid-gap) / 2), 2fr) 1fr;
+    grid-template-areas:
+        "header exit"
+        "image description"
+        "_ links";
+}
+.Project > div {
+    display: flex;
+    padding: 1rem;
+}
+.ProjectHeader {
+    grid-area: header;
+}
+.ProjectExit {
+    grid-area: exit;
+
+    justify-content: end;
+    align-items: start;
+    padding: 0;
+}
+.ProjectExit > button {
+    margin: 0;
+    padding: 0.4rem;
+}
+.ProjectImage {
+    grid-area: image;
+}
+.ProjectImage > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.ProjectDescription {
+    grid-area: description;
+    align-items: center;
+}
+.ProjectLinks {
+    grid-area: links;
+
+    flex-direction: row;
+    justify-content: end;
+    align-items: end;
+}
+.ProjectLinks > a {
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
+.Project:nth-child(1) {
+    left: var(--project-container-margin-x);
+}
+.Project:nth-child(2) {
+    right: var(--project-container-margin-x);
+}
+.Project:nth-child(3) {
+    left: var(--project-container-margin-x);
+    bottom: 0;
+}
+.Project:nth-child(4) {
+    right: var(--project-container-margin-x);
+    bottom: 0;
+}
+.Project[data-status="hoverable"]:hover {
+    height: calc(var(--project-scaled-height) - 4px);
+    width: calc(var(--project-scaled-width) - 4px);
+}
+.Project[data-status="focused"] {
+    box-shadow: 2px 2px 4px 4px hsla(0, 0%, 12%, 0.479);
+
+    width: calc(var(--project-width) * 2 + var(--project-gap-x));
+    height: calc(var(--project-height) * 2 + var(--project-gap-y));
+}
+
+@media screen and (max-width: 768px) {
+    :root {
+        --project-container-margin-x: calc((100% - var(--project-width)) / 2);
+    }
+    #ProjectsBackground {
+        min-height: calc(4 * (var(--project-height) + var(--project-gap-y)));
+    }
+    .Project {
+        position: absolute;
+        transition: none;
+
+        grid-template-rows: minmax(calc(var(--project-width) / 3 - var(--project-grid-gap) / 2), 1fr) minmax(calc(var(--project-width) * 2/3 - var(--project-grid-gap) / 2), 2fr) 2fr 1fr;
+        grid-template-areas:
+            "header exit"
+            "image _"
+            "description description"
+            "links links";
+    }
+    .Project[data-status="focused"] {
+        border-radius: 0;
+
+        grid-template-columns: 2fr 1fr;
+        grid-template-areas:
+            "header exit"
+            "image image"
+            "description description"
+            "links links";
+    }
+    .Project[data-status="hoverable"]:hover {
+        width: var(--project-width);
+        height: var(--project-height);
+    }
+    .Project:nth-child(1) {
+        left: var(--project-container-margin-x);
+        top: 0;
+    }
+    .Project:nth-child(2) {
+        left: var(--project-container-margin-x);
+        top: calc(var(--project-height) + var(--project-gap-y));
+    }
+    .Project:nth-child(3) {
+        left: var(--project-container-margin-x);
+        top: calc(2 * (var(--project-height) + var(--project-gap-y)));
+    }
+    .Project:nth-child(4) {
+        left: var(--project-container-margin-x);
+        top: calc(3 * (var(--project-height) + var(--project-gap-y)));
+    }
+    .Project[data-status="phonePreFocused"] {
+        position: fixed;
+        left: var(--phone-pre-focus-left);
+        top: var(--phone-pre-focus-top);
+        margin: 0;
+    }
+    .Project[data-status="focused"] {
+        width: 100lvw;
+        height: 100lvh;
+        position: fixed;
+        border: 1px solid black;
+        top: 0;
+        left: 0;
+        margin: 0;
+        transition: all var(--shared-transition-duration);
+    }
+    
+}
+
+
+/* Skills */
+
+:root {
+    --skill-width: 6rem;
+    --skill-height: 7rem;
+}
+.SkillsFlexContainer {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding: 1rem;
+    width: 100%;
+    height: 80vh;
+}
+.ResumeContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ResumeLink {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    gap: 2rem;
+    transition: all 500ms;
+    color: black;
+}
+.ResumeLink:hover {
+    transform: scale(1.05);
+}
+.ResumeImgContainer {
+    position: relative;
+    width: 7rem;
+    height: 8rem;
+}
+.ResumeImg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    content: url("./img/resume-7.png");
+
+    transition: opacity 500ms;
+}
+.ResumeImgWhiteBehind {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    content: url("./img/resume-7White.png");
+}
+.ResumeLink:hover .ResumeImg {
+    opacity: 0;
+}
+.ResumeText {
+    font-size: 3rem;
+}
+.ResumeLink:hover {
+    color: white;
+}
+#SkillsWheel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    
+}
+.CircleImage {
+    position: absolute;
+    width: calc(100% - var(--skill-width));
+    height: calc(100% - var(--skill-height));
+    left: calc(var(--skill-width) / 2);
+    top: calc(var(--skill-height) / 2);
+    background-image: url("./img/Frame 1.svg");
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.Skill {
+    position: absolute;
+    width: var(--skill-width);
+    height: var(--skill-height);
+    background-color: white;
+    box-shadow: 2px 2px 4px 4px hsla(0, 0%, 12%, 0.479);
+    border-radius: 1rem;
+    padding: 0.2rem;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    transition: all linear 100ms;
+}
+.SkillImg {
+    border-radius: 1rem;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 0.3rem;
+}
+.SkillText {
+    height: 0;
+    opacity: 0;
+
+    transition: all linear 100ms;
+}
+.Skill:hover {
+    transform: scale(1.2);
+    z-index: 1;
+}
+.Skill:hover > .SkillText {
+    height: 20%;
+    opacity: 1;
+}
+.Skill:hover > .SkillImg {
+    height: 80%;
+}
+.TextSmall {
+    font-size: 0.8rem;
+}
+.TextMedium {
+    font-size: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+    :root {
+        --skill-width: 4.5rem;
+        --skill-height: 5rem;
+    }
+    .SkillsFlexContainer {
+        flex-direction: column;
+    }
+    .ResumeContainer {
+        height: 50%;
+    }
+    .ResumeImgContainer {
+        width: 5rem;
+        height: 6rem;
+    }
+    .ResumeText {
+        font-size: 2.5rem;
+    }
+    .TextSmall {
+        font-size: 0.6rem;
+    }
+    .TextMedium {
+        font-size: 0.7rem;
+    }
+    
+}
+
+
+/* Contact */
+
+.ContactBackground {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    gap: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    
+}
+.InputContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+label {
+    width: 100%;
+    padding: 1rem;
+}
+input {
+    width: 100%;
+    padding: 1rem;
+    background-color: hsl(0, 100%, 78%);
+    border: 2px inset black;
+    border-radius: 0.5rem;
+}
+textarea {
+    height: 8rem;
+    background-color: hsl(0, 100%, 78%);
+    border: 2px inset black;
+    border-radius: 0.5rem;
+    resize: none;
+    padding: 1rem;
+}
+
+/* Shared Modals */
+
+section {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100lvw;
+    height: fit-content;
+    min-height: 100lvh;
+}
+section[data-status="hidden"] {
+    display: none;
+    transition: none;
+
+    height: 100vh;
+    overflow: hidden;
+}
+section[data-status="unclickable"] {
+    pointer-events: none;
+}
+section[data-status="pre-peek"] {
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Project Modal */
+:root {
+    --pre-peek-polygon: polygon(0 0, 0 0, 0 0, 0 0);
+    --peek-polygon: polygon(0 0, 0 0, 0 0, 0 0);
+    --transition-polygon: polygon(0 0, 0 0, 0 0, 0 0);
+    --full-screen-polygon: polygon(0 0, 0 100%, 100% 100%, 100% 0);
+}
+
+#Projects {
+    background-color: var(--green);
+    transition: clip-path var(--shared-transition-duration);
+}
+#Projects[data-status="pre-peek"] {    
+    clip-path: var(--pre-peek-polygon);
+    transition: none;
+}
+#Projects[data-status="pre-peek-with-transition"] {  
+    height: 100vh;
+    overflow: hidden;  
+    clip-path: var(--pre-peek-polygon);
+}
+#Projects[data-status="peek"] {
+    clip-path: var(--peek-polygon);
+}
+#Projects[data-status="transition"] {
+    clip-path: var(--transition-polygon);
+}
+#Projects[data-status="visible"] {
+    clip-path: var(--full-screen-polygon);
+}
+
+
+/* Skills Modal */
+:root {
+    --circle-center: 50% 50%;
+    --pre-peek-circle: circle(0 at var(--circle-center));
+    --peek-circle: circle(2rem at var(--circle-center));
+    --full-screen-circle: circle(73vmax at var(--circle-center));
+}
+#Skills {
+    background-color: var(--blue);
+    transition: clip-path var(--shared-transition-duration);
+}
+#Skills[data-status="pre-peek"] {
+    clip-path: var(--pre-peek-circle);
+}
+#Skills[data-status="peek"] {
+    clip-path: var(--peek-circle);
+    cursor: pointer;
+}
+#Skills[data-status="visible"] {
+    clip-path: var(--full-screen-circle);
+}
+
+/* Contact Modal */
+
+:root {
+    --contact-header-transition-transform: scale(1.1);
+}
+
+#ContactHeader {
+    transition: transform var(--shared-transition-duration), color var(--shared-transition-duration), background-color var(--shared-transition-duration);
+}
+#ContactHeader[data-status="peek"] {
+    transform: scale(1.1) translate(-10px, -10px);
+    color: var(--red);
+}
+#ContactHeader[data-status="transition"] {
+    transform: var(--contact-header-transition-transform);
+    color: var(--red);
+    background-color: var(--red);
+}
+
+#Contact {
+    width: 60vw;
+    height: 80vh;
+    left: 20vw;
+    top: 10vh;
+    min-height: 0;
+    background-color: var(--red);
+
+    transition: height var(--shared-transition-duration);
+}
+#Contact[data-status="pre-transition"] {
+    background-color: transparent;
+    height: 10vh;
+}
+#Contact[data-status="transition-out"] {
+    height: 10vh;
+}
+#Contact[data-status="visible"] {
+    
+    height: 80vh;
+}
+#Contact * {
+    transition: opacity var(--shared-transition-duration);
+}
+#Contact[data-status="pre-transition"] * {
+    opacity: 0;
+}
+#Contact[data-status="transition-out"] * {
+    opacity: 0;
+}
+#Contact[data-status="visible"] * {
+    opacity: 1;
+    transition: opacity var(--shared-transition-duration), background-color var(--shared-transition-duration);
+}
+
+@media screen and (max-width: 768px) {
+    #Contact {
+        width: 100lvw;
+        height: 100lvh;
+        left: 0;
+        top: 0;
+    }
+    #Contact[data-status="visible"] {
+        height: 100lvh;
+    }
+}
+/* End Modals */
