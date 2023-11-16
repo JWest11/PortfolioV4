@@ -1,5 +1,5 @@
 "use strict";
-import { GetElementByJSSelector } from "../Utilities.js";
+import { GetAllElementsWithJSSelector, GetElementByJSSelector } from "../Utilities.js";
 
 interface settings {
     closeProjectsSelector: string,
@@ -44,6 +44,7 @@ export function Init(settings: settings) {
     
     headerElement.addEventListener("click", Show);
     closeProjectsElement.addEventListener("click", Hide);
+
 }
 
 function Peek() {

@@ -16,6 +16,8 @@ ContactModal({
     headerSelector: "ContactHeader",
     contentSelector: "ContactSection",
     transitionTransformCSSVar: "--contact-header-transition-transform",
+    preVisiblePolygonCSSVar: "--contact-pre-visible-polygon",
+    visiblePolygonCSSVar: "--contact-visible-polygon",
     msTransitonDuration: msTransitonDuration
 });
 
@@ -46,7 +48,8 @@ ProjectsGrid({
     projectSelector: "Project",
     projectSectionSelector: "ProjectsSection",
     phonePreFocusLeftCSSVar: "--phone-pre-focus-left",
-    phonePreFocusTopCSSVar: "--phone-pre-focus-top"
+    phonePreFocusTopCSSVar: "--phone-pre-focus-top",
+    closeProjectButtonSelector: "CloseProjectButton"
 });
 
 SkillsWheel({

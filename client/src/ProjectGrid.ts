@@ -6,6 +6,7 @@ interface settings {
     phonePreFocusLeftCSSVar : string;
     phonePreFocusTopCSSVar : string;
     projectSectionSelector : string;
+    closeProjectButtonSelector : string;
 }
 
 let zIndex = 1;
@@ -16,6 +17,8 @@ let phonePreFocusTopCSSVar : string;
 let projectNodes : NodeListOf<HTMLElement>;
 let projectSectionSelector : string;
 let projectSectionElement : HTMLElement;
+let closeProjectButtons : NodeListOf<HTMLElement>;
+let closeProjectButtonSelector : string;
 
 
 
@@ -26,17 +29,24 @@ export function Init(settings : settings) {
     projectNodes = GetAllElementsWithJSSelector(settings.projectSelector) as NodeListOf<HTMLElement>;
     projectSectionSelector = settings.projectSectionSelector;
     projectSectionElement = GetElementByJSSelector(settings.projectSectionSelector) as HTMLElement;
+    closeProjectButtons = GetAllElementsWithJSSelector(settings.closeProjectButtonSelector) as NodeListOf<HTMLElement>;
+    closeProjectButtonSelector = settings.closeProjectButtonSelector;
 
     projectNodes.forEach((projectNode) => {
         projectNode.addEventListener("click", e => FocusProject(e));
         projectNode.addEventListener("mouseover", e => SetZIndex(e));
     })
 
+    closeProjectButtons.forEach((closeProjectButton) => {
+        closeProjectButton.addEventListener("click", UnfocusAllUnchecked);
+    })
+
     projectSectionElement.addEventListener("click", e => UnfocusAll(e));
-    
+ 
 }
 
 function FocusProject(event) {
+    if (focused) {return;}
     const node = event.target.closest(`[data-js-selector="${projectSelector}"]`);
     const index = Number(node.dataset.index);
     if (window.innerWidth <= 768) {
@@ -86,7 +96,21 @@ function UnfocusAll(event) {
     projectNodes.forEach(node => {
         node.dataset.status = "hoverable";
     });
-    focused = false;
+
+    setTimeout(() => {
+        focused = false;
+    }, 100)
+    
+}
+
+function UnfocusAllUnchecked() {
+    projectNodes.forEach(node => {
+        node.dataset.status = "hoverable";
+    });
+
+    setTimeout(() => {
+        focused = false;
+    }, 100)
 }
 
 function SetZIndex(event) {

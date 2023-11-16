@@ -7,6 +7,8 @@ interface settings {
     headerSelector: string,
     contentSelector: string,
     transitionTransformCSSVar: string,
+    preVisiblePolygonCSSVar: string,
+    visiblePolygonCSSVar: string,
     msTransitonDuration: number
 }
 
@@ -17,6 +19,8 @@ let contentElement : HTMLElement;
 let homeElement : HTMLElement;
 let closeContactElement : HTMLElement;
 let transitionTransformCSSVar : string;
+let preVisiblePolygonCSSVar : string;
+let visiblePolygonCSSVar : string;
 let msTransitonDuration : number;
 
 
@@ -28,6 +32,8 @@ export function Init(settings) {
     homeElement = GetElementByJSSelector(settings.homeSelector) as HTMLElement;
     closeContactElement = GetElementByJSSelector(settings.closeContactSelector) as HTMLElement;
     transitionTransformCSSVar = settings.transitionTransformCSSVar;
+    preVisiblePolygonCSSVar = settings.preVisiblePolygonCSSVar;
+    visiblePolygonCSSVar = settings.visiblePolygonCSSVar;
     msTransitonDuration = settings.msTransitonDuration;
 
     headerElement.addEventListener("mouseover", Peek);
@@ -59,6 +65,7 @@ function Unpeek() {
 function Show() {
 
     isOpened = true;
+    SetClipRect();
     homeElement.dataset.status = "unclickable";
     contentElement.dataset.status = "pre-transition";
     SetTransitionHeaderTransform();
@@ -109,4 +116,10 @@ function SetTransitionHeaderTransform() {
     const translateY = headerMiddleY - contentMiddleY;
 
     document.documentElement.style.setProperty(transitionTransformCSSVar, `translate(${-translateX}px, ${-translateY}px) scale(${scaleX}, ${scaleY})`);
+    
+}
+
+function SetClipRect() {
+    const contentBoundingRectangle = contentElement.getBoundingClientRect();
+    document.documentElement.style.setProperty(preVisiblePolygonCSSVar, `polygon(0 ${contentBoundingRectangle.top}, 0 ${contentBoundingRectangle.top}, 100% ${contentBoundingRectangle.top}, 100% ${contentBoundingRectangle.top})`);
 }

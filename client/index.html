@@ -32,13 +32,13 @@
             <div class="HomeSectionHeader" id="ContactHeader" data-js-selector="ContactHeader">Contact</div>
         </div>
         <footer id="Links">
-            <div class="Link" data-status="light" data-js-selector="GithubLink"><a href="" target="_blank">
+            <div class="Link" data-status="light" data-js-selector="GithubLink"><a href="https://github.com/JWest11" target="_blank">
                 <img id="LinkImageGitHub" src="./img/linkIcons/githubLogoWhite.png"  alt="Github">
             </a></div>
-            <div class="Link" data-status="light" data-js-selector="LeetcodeLink"><a href="" target="_blank">
+            <div class="Link" data-status="light" data-js-selector="LeetcodeLink"><a href="https://leetcode.com/joeywest1414/" target="_blank">
                 <img id="LinkImageLeetCode" src="./img/linkIcons/leetcodeWhite.png"  alt="LeetCode">
             </a></div>
-            <div class="Link" data-status="light" data-js-selector="LinkedInLink"><a href="" target="_blank">
+            <div class="Link" data-status="light" data-js-selector="LinkedInLink"><a href="https://www.linkedin.com/in/joseph-west-500a90164/" target="_blank">
                 <img id="LinkImageLinkedIn" src="./img/linkIcons/linkedInLogoWhite.png" alt="LinkedIn">
             </a></div>
         </footer>
@@ -52,7 +52,7 @@
                     <h2>This Portfolio</h2>
                 </div>
                 <div class="ProjectExit">
-                    <button class="CloseButton">Close</button>
+                    <button data-js-selector="CloseProjectButton" class="ProjectButton">Close</button>
                 </div>
                 <div class="ProjectImage">
                     <img src="./img/projects/portfolioImage.png" alt="ProjectImage">
@@ -61,7 +61,7 @@
                     <p>This portfolio project. Made with TypeScript and CSS. It is responsive too!</p>
                 </div>
                 <div class="ProjectLinks">
-                    <a class="CloseButton">Source Code</a>
+                    <a class="ProjectButton" href="https://github.com/JWest11/PortfolioV4" target="_blank">Source Code</a>
                 </div>
             </div>
             <div data-index="1" data-status="hoverable" data-js-selector="Project" class="Project">
@@ -69,7 +69,7 @@
                     <h2>Medieval Looter</h2>
                 </div>
                 <div class="ProjectExit">
-                    <button class="CloseButton">Close</button>
+                    <button data-js-selector="CloseProjectButton" class="ProjectButton">Close</button>
                 </div>
                 <div class="ProjectImage">
                     <img src="./img/projects/unrealBackgroundImage.jpg" alt="ProjectImage">
@@ -78,7 +78,7 @@
                     <p>An Unreal Engine game in progress, using C++, Blender, and the Unreal Engine Editor. Currently completed are equipment and inventory systems, character animations, and core combat mechanics.</p>
                 </div>
                 <div class="ProjectLinks">
-                    <a class="CloseButton">Source Code</a>
+                    <a class="ProjectButton" href="https://github.com/JWest11/MedievalLooter" target="_blank">Source Code</a>
                 </div>
             </div>
             <div data-index="2" data-status="hoverable" data-js-selector="Project" class="Project">
@@ -86,7 +86,7 @@
                     <h2>Chess Online</h2>
                 </div>
                 <div class="ProjectExit">
-                    <button class="CloseButton">Close</button>
+                    <button data-js-selector="CloseProjectButton" class="ProjectButton">Close</button>
                 </div>
                 <div class="ProjectImage">
                     <img src="./img/projects/ChessOnlineThumbnail.png" alt="ProjectImage">
@@ -95,8 +95,8 @@
                     <p>Online player vs player chess using websockets, ASP.NET Core Blazor, and C#.</p>
                 </div>
                 <div class="ProjectLinks">
-                    <a class="CloseButton">Source Code</a>
-                    <a class="CloseButton">Live</a>
+                    <a class="ProjectButton" href="https://github.com/JWest11/BlazorServerChess" target="_blank">Source Code</a>
+                    <a class="ProjectButton" href="http://blazorserverchess.jwest11.com/" target="_blank">Live</a>
                 </div>
             </div>
             <div data-index="3" data-status="hoverable" data-js-selector="Project" class="Project">
@@ -104,7 +104,7 @@
                     <h2>Rasterizer</h2>
                 </div>
                 <div class="ProjectExit">
-                    <button class="CloseButton">Close</button>
+                    <button data-js-selector="CloseProjectButton" class="ProjectButton">Close</button>
                 </div>
                 <div class="ProjectImage">
                     <img src="./img/projects/rasterizerThumbnail.png" alt="ProjectImage">
@@ -113,7 +113,7 @@
                     <p>A Rasterizer (basic 3D graphics renderer) created in C++.</p>
                 </div>
                 <div class="ProjectLinks">
-                    <a class="CloseButton">Source Code</a>
+                    <a class="ProjectButton" href="https://github.com/JWest11/rasterizer" target="_blank">Source Code</a>
                 </div>
             </div>
         </div>
@@ -169,8 +169,8 @@
         
     </section>
     <section id="Contact" data-status="hidden" data-js-selector="ContactSection">
-        <button class="CloseButton" data-js-selector="ContactCloseButton">Close</button>
         <div class="ContactBackground">
+            <button class="CloseButton" data-js-selector="ContactCloseButton">Close</button>
             <div class="InputContainer">
                 <label for="Email">Email</label>
                 <input data-js-selector="EmailInput" type="email" name="Email" id="EmailInput">
@@ -183,8 +183,8 @@
                 <label for="Message">Message</label>
                 <textarea data-js-selector="MessageInput" type="text" name="Message" id="MessageInput"></textarea>
             </div>
-            <div class="InputContainer">
-                <button data-js-selector="SubmitButton">Submit</button>
+            <div class="InputContainer SubmitContainer">
+                <button data-js-selector="SubmitButton" class="SubmitButton">Submit</button>
             </div>
         </div>
     </section>

@@ -8,6 +8,8 @@ let phonePreFocusTopCSSVar;
 let projectNodes;
 let projectSectionSelector;
 let projectSectionElement;
+let closeProjectButtons;
+let closeProjectButtonSelector;
 export function Init(settings) {
     projectSelector = settings.projectSelector;
     phonePreFocusLeftCSSVar = settings.phonePreFocusLeftCSSVar;
@@ -15,13 +17,21 @@ export function Init(settings) {
     projectNodes = GetAllElementsWithJSSelector(settings.projectSelector);
     projectSectionSelector = settings.projectSectionSelector;
     projectSectionElement = GetElementByJSSelector(settings.projectSectionSelector);
+    closeProjectButtons = GetAllElementsWithJSSelector(settings.closeProjectButtonSelector);
+    closeProjectButtonSelector = settings.closeProjectButtonSelector;
     projectNodes.forEach((projectNode) => {
         projectNode.addEventListener("click", e => FocusProject(e));
         projectNode.addEventListener("mouseover", e => SetZIndex(e));
     });
+    closeProjectButtons.forEach((closeProjectButton) => {
+        closeProjectButton.addEventListener("click", UnfocusAllUnchecked);
+    });
     projectSectionElement.addEventListener("click", e => UnfocusAll(e));
 }
 function FocusProject(event) {
+    if (focused) {
+        return;
+    }
     const node = event.target.closest(`[data-js-selector="${projectSelector}"]`);
     const index = Number(node.dataset.index);
     if (window.innerWidth <= 768) {
@@ -69,7 +79,17 @@ function UnfocusAll(event) {
     projectNodes.forEach(node => {
         node.dataset.status = "hoverable";
     });
-    focused = false;
+    setTimeout(() => {
+        focused = false;
+    }, 100);
+}
+function UnfocusAllUnchecked() {
+    projectNodes.forEach(node => {
+        node.dataset.status = "hoverable";
+    });
+    setTimeout(() => {
+        focused = false;
+    }, 100);
 }
 function SetZIndex(event) {
     if (focused) {
