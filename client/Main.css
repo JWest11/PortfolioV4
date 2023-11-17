@@ -291,7 +291,7 @@ a {
     }
     .Project[data-status="focused"] {
         width: 100lvw;
-        height: 100svh;
+        height: 100dvh;
         position: fixed;
         border: 1px solid black;
         top: 0;
@@ -675,12 +675,12 @@ section[data-status="pre-peek"] {
 @media screen and (max-width: 768px) {
     #Contact {
         width: 100lvw;
-        height: 100lvh;
+        height: 100dvh;
         left: 0;
         top: 0;
     }
     #Contact[data-status="visible"] {
-        height: 100lvh;
+        height: 100dvh;
     }
 }
 /* End Modals */
