@@ -220,7 +220,7 @@ a {
     height: calc(var(--project-height) * 2 + var(--project-gap-y));
 }
 
-@media screen and (max-width: 1920px) {
+@media screen and (max-width: 1900px) {
     :root {
         --project-width: 18rem;
         --project-height: 18rem;
