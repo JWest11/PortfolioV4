@@ -23,7 +23,6 @@ export function Init(settings) {
     headerElement.addEventListener("mouseleave", Unpeek);
     headerElement.addEventListener("click", Show);
     closeContactElement.addEventListener("click", Hide);
-    window.addEventListener("resize", HideInstant);
 }
 function Peek() {
     if (isOpened) {

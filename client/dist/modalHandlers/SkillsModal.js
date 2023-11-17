@@ -26,10 +26,6 @@ export function Init(settings) {
     contentElement.addEventListener("click", Show);
     contentElement.addEventListener("mouseleave", (event) => Unpeek(event));
     closeSkillsElement.addEventListener("click", Hide);
-    window.addEventListener("resize", () => {
-        SetCircleCenter();
-        HideInstant();
-    });
 }
 function Peek() {
     if (isOpened || !canPeek) {

@@ -42,7 +42,6 @@ export function Init(settings) {
 
     closeContactElement.addEventListener("click", Hide);
 
-    window.addEventListener("resize", HideInstant);
 }
 
 function Peek() {

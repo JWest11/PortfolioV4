@@ -43,7 +43,6 @@ export function Init(settings: settings) {
 
     window.addEventListener("resize", () => {
         SetCircleCenter();
-        HideInstant();
     });
 }
 
