@@ -291,7 +291,7 @@ a {
     }
     .Project[data-status="focused"] {
         width: 100lvw;
-        height: 100lvh;
+        height: 100svh;
         position: fixed;
         border: 1px solid black;
         top: 0;
