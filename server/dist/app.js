@@ -28,6 +28,6 @@ app.post("/email", function (req, res) {
         res.send("Bad request");
     }
 });
-app.listen(port, function () {
+app.listen(port, "localhost", function () {
     console.log("Server listening on port ".concat(port));
 });

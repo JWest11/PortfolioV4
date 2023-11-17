@@ -34,6 +34,6 @@ app.post("/email", (req, res) => {
     }
 });
 
-app.listen(port, () => {
+app.listen(port, "localhost", () => {
     console.log(`Server listening on port ${port}`);
 });
