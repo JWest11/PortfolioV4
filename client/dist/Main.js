@@ -44,7 +44,8 @@ ProjectsGrid({
     projectSectionSelector: "ProjectsSection",
     phonePreFocusLeftCSSVar: "--phone-pre-focus-left",
     phonePreFocusTopCSSVar: "--phone-pre-focus-top",
-    closeProjectButtonSelector: "CloseProjectButton"
+    closeProjectButtonSelector: "CloseProjectButton",
+    homeSelector: "Home"
 });
 SkillsWheel({
     skillSelector: "Skill",

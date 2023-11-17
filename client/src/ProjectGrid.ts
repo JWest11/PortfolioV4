@@ -2,11 +2,12 @@
 import { GetElementByJSSelector, GetAllElementsWithJSSelector } from "./Utilities.js";
 
 interface settings {
-    projectSelector : string;
-    phonePreFocusLeftCSSVar : string;
-    phonePreFocusTopCSSVar : string;
-    projectSectionSelector : string;
-    closeProjectButtonSelector : string;
+    projectSelector : string,
+    phonePreFocusLeftCSSVar : string,
+    phonePreFocusTopCSSVar : string,
+    projectSectionSelector : string,
+    closeProjectButtonSelector : string,
+    homeSelector : string
 }
 
 let zIndex = 1;
@@ -16,9 +17,11 @@ let phonePreFocusLeftCSSVar : string;
 let phonePreFocusTopCSSVar : string;
 let projectNodes : NodeListOf<HTMLElement>;
 let projectSectionSelector : string;
+let homeSelector : string;
 let projectSectionElement : HTMLElement;
 let closeProjectButtons : NodeListOf<HTMLElement>;
 let closeProjectButtonSelector : string;
+let homeElement : HTMLElement;
 
 
 
@@ -31,6 +34,8 @@ export function Init(settings : settings) {
     projectSectionElement = GetElementByJSSelector(settings.projectSectionSelector) as HTMLElement;
     closeProjectButtons = GetAllElementsWithJSSelector(settings.closeProjectButtonSelector) as NodeListOf<HTMLElement>;
     closeProjectButtonSelector = settings.closeProjectButtonSelector;
+    homeSelector = settings.homeSelector;
+    homeElement = GetElementByJSSelector(settings.homeSelector) as HTMLElement;
 
     projectNodes.forEach((projectNode) => {
         projectNode.addEventListener("click", e => FocusProject(e));
@@ -49,6 +54,7 @@ function FocusProject(event) {
     if (focused) {return;}
     const node = event.target.closest(`[data-js-selector="${projectSelector}"]`);
     const index = Number(node.dataset.index);
+    document.body.dataset.status = "noscroll";
     if (window.innerWidth <= 768) {
         PhoneFocusByIndex(index);
     }
@@ -100,7 +106,7 @@ function UnfocusAll(event) {
     setTimeout(() => {
         focused = false;
     }, 100)
-    
+    document.body.dataset.status = "";
 }
 
 function UnfocusAllUnchecked() {
@@ -111,6 +117,7 @@ function UnfocusAllUnchecked() {
     setTimeout(() => {
         focused = false;
     }, 100)
+    document.body.dataset.status = "";
 }
 
 function SetZIndex(event) {

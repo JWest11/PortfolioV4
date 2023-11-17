@@ -7,9 +7,11 @@ let phonePreFocusLeftCSSVar;
 let phonePreFocusTopCSSVar;
 let projectNodes;
 let projectSectionSelector;
+let homeSelector;
 let projectSectionElement;
 let closeProjectButtons;
 let closeProjectButtonSelector;
+let homeElement;
 export function Init(settings) {
     projectSelector = settings.projectSelector;
     phonePreFocusLeftCSSVar = settings.phonePreFocusLeftCSSVar;
@@ -19,6 +21,8 @@ export function Init(settings) {
     projectSectionElement = GetElementByJSSelector(settings.projectSectionSelector);
     closeProjectButtons = GetAllElementsWithJSSelector(settings.closeProjectButtonSelector);
     closeProjectButtonSelector = settings.closeProjectButtonSelector;
+    homeSelector = settings.homeSelector;
+    homeElement = GetElementByJSSelector(settings.homeSelector);
     projectNodes.forEach((projectNode) => {
         projectNode.addEventListener("click", e => FocusProject(e));
         projectNode.addEventListener("mouseover", e => SetZIndex(e));
@@ -34,6 +38,7 @@ function FocusProject(event) {
     }
     const node = event.target.closest(`[data-js-selector="${projectSelector}"]`);
     const index = Number(node.dataset.index);
+    document.body.dataset.status = "noscroll";
     if (window.innerWidth <= 768) {
         PhoneFocusByIndex(index);
     }
@@ -82,6 +87,7 @@ function UnfocusAll(event) {
     setTimeout(() => {
         focused = false;
     }, 100);
+    document.body.dataset.status = "";
 }
 function UnfocusAllUnchecked() {
     projectNodes.forEach(node => {
@@ -90,6 +96,7 @@ function UnfocusAllUnchecked() {
     setTimeout(() => {
         focused = false;
     }, 100);
+    document.body.dataset.status = "";
 }
 function SetZIndex(event) {
     if (focused) {
