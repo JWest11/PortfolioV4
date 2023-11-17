@@ -3,7 +3,7 @@ import { sendEmail } from "./email.js";
 
 const express = require("express");
 const app = express();
-const port = 3010;
+const port = 6010;
 
 app.use(express.static("../../client"));
 app.use(express.json());

@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var email_js_1 = require("./email.js");
 var express = require("express");
 var app = express();
-var port = 3010;
+var port = 6010;
 app.use(express.static("../../client"));
 app.use(express.json());
 app.get("/", function (req, res) {
