@@ -69,6 +69,7 @@ function Hide() {
     }, msTransitonDuration);
     setTimeout(() => {
         isOpened = false;
+        peeked = false;
         homeElement.dataset.status = "clickable";
     }, 2 * msTransitonDuration);
 }
