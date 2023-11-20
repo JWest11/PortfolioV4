@@ -541,7 +541,7 @@ textarea {
     border: 2px outset hsl(0, 0%, 37%);
     border-radius: 0.5rem;
     color: white;
-    margin-top: 1rem;
+    margin-top: 2rem;
 }
 .SubmitButton:hover {
     cursor: pointer;
