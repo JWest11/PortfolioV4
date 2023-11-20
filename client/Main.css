@@ -6,12 +6,13 @@
 }
 
 :root {
-    --red: hsl(0, 94%, 69%);
-    --blue: hsl(239, 32%, 49%);
-    --green: hsl(154, 83%, 45%);
-    --red-shadow: hsl(0, 100%, 74%);
+    --red: hsl(36, 100%, 80%);
+    --blue: hsl(239, 48%, 66%);
+    --green: hsl(154, 53%, 57%);
+    --red-shadow: hsl(36, 100%, 80%);
     --blue-shadow: hsl(248, 32%, 54%);
     --green-shadow: hsl(154, 59%, 51%);
+    --background-color: hsl(0, 0%, 21%);
     --shared-transition-duration: 800ms;
 }
 #Home {
@@ -70,7 +71,7 @@ body[data-status="noscroll"] {
 }
 
 body {
-    background-color: hsl(0, 0%, 17%);
+    background-color: var(--background-color);
 }
 .HomeSectionHeader {
     font-size: 4em;
@@ -79,7 +80,7 @@ body {
     cursor: pointer;
 }
 .CloseButton {
-    background-color: hsl(0, 0%, 17%);
+    background-color: var(--background-color);
     border: 2px outset rgb(73, 73, 73);
     margin: 1rem;
     border-radius: 5px;
@@ -468,28 +469,50 @@ a {
 }
 
 .ContactBackground {
-    display: flex;
-    flex-direction: column;
+    display: grid;
     height: 100%;
     width: 100%;
-    gap: 2rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    justify-content: flex-start;
-    
+    padding: 1rem;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 2fr 1fr;
+
+    grid-template-areas: 
+        "header exit"
+        "input1 input1"
+        "input2 input2"
+        "input3 input3"
+        "submit submit";
 }
-.ContactBackground > .CloseButton {
-    align-self: flex-end;
-    margin: 1rem 0 0 0;
+.ContactBackground > :nth-child(1) {
+    grid-area: header;
 }
-.SubmitContainer {
-    margin-top: auto;
-    margin-bottom: 2rem;
+.ContactBackground > :nth-child(2) {
+    grid-area: exit;
+    margin: 0;
+    width: 5rem;
+    height: 3rem;
+    align-self: flex-start;
+    justify-self: flex-end;
+}
+.ContactBackground > :nth-child(3) {
+    grid-area: input1;
+}
+.ContactBackground > :nth-child(4) {
+    grid-area: input2;
+}
+.ContactBackground > :nth-child(5) {
+    grid-area: input3;
+}
+.ContactBackground > :nth-child(6) {
+    grid-area: submit;
+}
+.ContactInnerHeader {
+    font-size: 3rem;
+    color: var(--background-color);
 }
 .InputContainer {
     display: flex;
     flex-direction: column;
-    width: 100%;
 }
 label {
     width: 100%;
@@ -504,13 +527,13 @@ input {
     color: white;
 }
 textarea {
-    height: 8rem;
     background-color: var(--input-color);
     border: 2px solid black;
     border-radius: 0.5rem;
     resize: none;
     color: white;
     padding: 1rem;
+    height: 80%;
 }
 .SubmitButton {
     padding: 1rem;
@@ -608,12 +631,10 @@ section[data-status="pre-peek"] {
 
 :root {
     --contact-header-transition-transform: scale(1.1);
-    --contact-pre-visible-polygon: polygon(0 0, 0 0, 100% 0, 100% 0);
-    --contact-visible-polygon: polygon(0 0, 0 100%, 100% 100%, 100% 0);
 }
 
 #ContactHeader {
-    transition: transform var(--shared-transition-duration), color var(--shared-transition-duration), background-color var(--shared-transition-duration);
+    transition: transform var(--shared-transition-duration), color var(--shared-transition-duration), background-color var(--shared-transition-duration), opacity var(--shared-transition-duration);
 }
 #ContactHeader[data-status="peek"] {
     transform: scale(1.1) translate(-10px, -10px);
@@ -623,6 +644,12 @@ section[data-status="pre-peek"] {
     transform: var(--contact-header-transition-transform);
     color: var(--red);
     background-color: var(--red);
+}
+#ContactHeader[data-status="covered"] {
+    transform: var(--contact-header-transition-transform);
+    color: var(--red);
+    background-color: var(--red);
+    opacity: 0;
 }
 
 #Contact {
@@ -634,21 +661,18 @@ section[data-status="pre-peek"] {
     min-height: 0;
     background-color: var(--red);
 
-    transition: height var(--shared-transition-duration), clip-path var(--shared-transition-duration);
+    transition: border-radius var(--shared-transition-duration), box-shadow var(--shared-transition-duration);
 }
 #Contact[data-status="pre-transition"] {
-    background-color: transparent;
-    height: 10vh;
-    clip-path: var(--contact-pre-visible-polygon);
+    opacity: 0;
 }
 #Contact[data-status="transition-out"] {
-    height: 10vh;
-    clip-path: var(--contact-pre-visible-polygon);
-    transition: height var(--shared-transition-duration), clip-path calc(var(--shared-transition-duration) * 5);
+    transition: border-radius var(--shared-transition-duration), box-shadow var(--shared-transition-duration), opacity var(--shared-transition-duration);
 }
 #Contact[data-status="visible"] {
-    clip-path: var(--contact-visible-polygon);
-    height: 80vh;
+    opacity: 1;
+    border-radius: 1rem;
+    box-shadow: 2px 2px 4px 4px hsl(0, 0%, 44%);
 }
 #Contact * {
     transition: opacity var(--shared-transition-duration);
@@ -667,7 +691,8 @@ section[data-status="pre-peek"] {
     #Contact {
         width: 50vw;
         left: 25vw;
-        top: 10vh;
+        top: 15vh;
+        height: 75vh;
     }
     
 }
@@ -678,9 +703,10 @@ section[data-status="pre-peek"] {
         height: 100dvh;
         left: 0;
         top: 0;
+        border-radius: 0;
     }
     #Contact[data-status="visible"] {
-        height: 100dvh;
+        border-radius: 0;
     }
 }
 /* End Modals */

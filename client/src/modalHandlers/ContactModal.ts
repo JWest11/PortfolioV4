@@ -22,10 +22,12 @@ let transitionTransformCSSVar : string;
 let preVisiblePolygonCSSVar : string;
 let visiblePolygonCSSVar : string;
 let msTransitonDuration : number;
+let peeked = false;
+let peekedTimeout : number;
 
 
 
-export function Init(settings) {
+export function Init(settings : settings) {
 
     headerElement = GetElementByJSSelector(settings.headerSelector) as HTMLElement;
     contentElement = GetElementByJSSelector(settings.contentSelector) as HTMLElement;
@@ -47,9 +49,12 @@ export function Init(settings) {
 function Peek() {
     
     if (isOpened) {return;}
-
-    unmodifiedHeaderRectangle = headerElement.getBoundingClientRect();
+    if (!peeked) {
+        unmodifiedHeaderRectangle = headerElement.getBoundingClientRect();
+    }
     headerElement.dataset.status = "peek";
+    peeked = true;
+    clearTimeout(peekedTimeout);
 
 }
 
@@ -59,21 +64,24 @@ function Unpeek() {
 
     headerElement.dataset.status = "base";
 
+    peekedTimeout = setTimeout(() => {
+        peeked = false;
+    }, msTransitonDuration)
+
 }
 
 function Show() {
 
     isOpened = true;
-    SetClipRect();
     homeElement.dataset.status = "unclickable";
     contentElement.dataset.status = "pre-transition";
     SetTransitionHeaderTransform();
     headerElement.dataset.status = "transition";
-    
 
     setTimeout(() => {
         contentElement.dataset.status = "visible";
-    }, msTransitonDuration)
+        headerElement.dataset.status = "covered";
+    }, msTransitonDuration);
     
 }
 
@@ -81,13 +89,17 @@ function Hide() {
     
     if (!isOpened) {return;}
     contentElement.dataset.status = "transition-out";
+    headerElement.dataset.status = "transition";
 
     setTimeout(() => {
         contentElement.dataset.status = "hidden";
         headerElement.dataset.status = "base";
-        homeElement.dataset.status = "clickable";
-        isOpened = false;
     }, msTransitonDuration)
+
+    setTimeout(() => {
+        isOpened = false;
+        homeElement.dataset.status = "clickable";
+    }, 2 * msTransitonDuration)
 
 }
 function HideInstant() {
@@ -116,9 +128,4 @@ function SetTransitionHeaderTransform() {
 
     document.documentElement.style.setProperty(transitionTransformCSSVar, `translate(${-translateX}px, ${-translateY}px) scale(${scaleX}, ${scaleY})`);
     
-}
-
-function SetClipRect() {
-    const contentBoundingRectangle = contentElement.getBoundingClientRect();
-    document.documentElement.style.setProperty(preVisiblePolygonCSSVar, `polygon(0 ${contentBoundingRectangle.top}, 0 ${contentBoundingRectangle.top}, 100% ${contentBoundingRectangle.top}, 100% ${contentBoundingRectangle.top})`);
 }
