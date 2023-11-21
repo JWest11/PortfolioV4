@@ -64,6 +64,7 @@ body[data-status="noscroll"] {
 }
 .Link:hover {
     background-color: white;
+    cursor: pointer;
 }
 .Link img {
     width: 2.8rem;
